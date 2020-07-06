@@ -4,6 +4,8 @@ enum Level {
   professional
 }
 
+union GlobalSearch = Author | Anime
+
 interface Base {
   _id: ID!
   name: String!
@@ -34,6 +36,8 @@ type Query {
   getAnime(name: String!): Base
   "Return a anime"
   getAuthor(name: String!): Base
+  "Excecute a global search"
+  searchItems(keyword: String!): [GlobalSearch]
 }
 
 input AnimeInput {
