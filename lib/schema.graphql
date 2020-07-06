@@ -1,0 +1,14 @@
+type Anime {
+  _id: ID
+  name: String
+  description: String
+}
+
+type Query {
+  "Return the greating in spanish"
+  hello: String
+  "Return the greating in english"
+  great: String
+  "Return the anime"
+  getAnimes: [Anime]
+}
