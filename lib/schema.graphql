@@ -4,30 +4,36 @@ enum Level {
   professional
 }
 
-type Author {
+interface Base {
   _id: ID!
   name: String!
-  born: Int!
   description: String
+}
+
+type Author implements Base {
+  _id: ID!
+  name: String!
+  description: String
+  born: Int
   level: Level
 }
 
-type Anime {
+type Anime implements Base {
   _id: ID!
   name: String!
-  description: String!
+  description: String
   authors: [Author]
 }
 
 type Query {
   "Return the animes"
-  getAnimes: [Anime]
+  getAnimes: [Base]
   "Return the authors"
-  getAuthors: [Author]
+  getAuthors: [Base]
   "Return a anime"
-  getAnime(name: String!): Anime
+  getAnime(name: String!): Base
   "Return a anime"
-  getAuthor(name: String!): Author
+  getAuthor(name: String!): Base
 }
 
 input AnimeInput {
@@ -49,11 +55,11 @@ input AuthorInput {
 
 type Mutation {
   "Create a anime"
-  createAnime(input: AnimeInput!): Anime
+  createAnime(input: AnimeInput!): Base
   "Edit a anime"
-  editAnime(name: String!, input: AnimeEditInput!): Anime
+  editAnime(name: String!, input: AnimeEditInput!): Base
   "Add a author of the anime"
-  addAuthor(animeId: ID!, authorId: ID!): Anime
+  addAuthor(animeId: ID!, authorId: ID!): Base
   "Cretae a author"
-  createAuthor(input: AuthorInput!): Author
+  createAuthor(input: AuthorInput!): Base
 }
