@@ -1,14 +1,22 @@
 type Anime {
-  _id: ID
-  name: String
-  description: String
+  _id: ID!
+  name: String!
+  description: String!
+}
+
+input AnimeInput {
+  name: String!
+  description: String!
 }
 
 type Query {
-  "Return the greating in spanish"
-  hello: String
-  "Return the greating in english"
-  great: String
   "Return the anime"
   getAnimes: [Anime]
+  "Return a anime"
+  getAnime(name: String!): Anime
+}
+
+type Mutation {
+  "Create a anime"
+  createAnime(input: AnimeInput!): Anime
 }
