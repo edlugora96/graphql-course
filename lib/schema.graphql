@@ -1,8 +1,15 @@
+"Validate the level pf the author"
+enum Level {
+  basic
+  professional
+}
+
 type Author {
   _id: ID!
   name: String!
   born: Int!
   description: String
+  level: Level
 }
 
 type Anime {
@@ -37,6 +44,7 @@ input AuthorInput {
   name: String!
   born: Int!
   description: String
+  level: Level
 }
 
 type Mutation {
