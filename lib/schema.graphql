@@ -1,7 +1,26 @@
+type Author {
+  _id: ID!
+  name: String!
+  born: Int!
+  description: String
+}
+
 type Anime {
   _id: ID!
   name: String!
   description: String!
+  authors: [Author]
+}
+
+type Query {
+  "Return the animes"
+  getAnimes: [Anime]
+  "Return the authors"
+  getAuthors: [Author]
+  "Return a anime"
+  getAnime(name: String!): Anime
+  "Return a anime"
+  getAuthor(name: String!): Author
 }
 
 input AnimeInput {
@@ -9,14 +28,24 @@ input AnimeInput {
   description: String!
 }
 
-type Query {
-  "Return the anime"
-  getAnimes: [Anime]
-  "Return a anime"
-  getAnime(name: String!): Anime
+input AnimeEditInput {
+  name: String
+  description: String
+}
+
+input AuthorInput {
+  name: String!
+  born: Int!
+  description: String
 }
 
 type Mutation {
   "Create a anime"
   createAnime(input: AnimeInput!): Anime
+  "Edit a anime"
+  editAnime(name: String!, input: AnimeEditInput!): Anime
+  "Add a author of the anime"
+  addAuthor(animeId: ID!, authorId: ID!): Anime
+  "Cretae a author"
+  createAuthor(input: AuthorInput!): Author
 }
